@@ -154,6 +154,7 @@ def curl_get(url, proxy=None, timeout=5):
             curl.setopt(pycurl.PROXYTYPE, pycurl.PROXYTYPE_SOCKS4)
         elif proxy["protocol"] == "socks5":
             curl.setopt(pycurl.PROXYTYPE, pycurl.PROXYTYPE_SOCKS5)
+        print proxy_url
         curl.setopt(pycurl.PROXY, proxy_url)
     t = time.time()
     try:
