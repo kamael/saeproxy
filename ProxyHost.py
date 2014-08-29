@@ -101,8 +101,8 @@ class ProxyHost:
         c = self.conn.cursor()
         c.execute("create table if not exists proxytable (host text,     \
                                                           port text,      \
-                                                          anony text,    \
                                                           protocol text, \
+                                                          anony text,    \
                                                           speed int)")
         self.conn.commit()
 

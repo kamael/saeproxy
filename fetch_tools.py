@@ -71,6 +71,14 @@ def filter_fetch(proxy_list):
         if not proxy[4]:
             proxy[4] = "1001"
 
+        try:
+            proxy[4] = str(proxy[4])
+        except:
+            proxy[4] = "1001"
+
+        #if proxy[4] != "1001":
+        #    print "kkk", proxy[4], type(proxy[4])
+
         proxy_list[i] = tuple(proxy_list[i])
 
     result_list = []
@@ -84,6 +92,7 @@ def test_func_return(func):
     """
     参数为抓取proxies的函数，写完函数调用一下这个test函数测试结果是否符合
     数据库要求，以防结果出错。
+    (IP, PORT, Protocol, Anony, Time)
     """
 
     proxy_list = func()
