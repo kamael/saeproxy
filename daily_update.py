@@ -1,4 +1,4 @@
 import ProxyHost
 
-host = ProxyHost.ProxyHost(True)
+host = ProxyHost.ProxyHost()
 host.update("http://www.wikipedia.org/")

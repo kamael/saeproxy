@@ -54,8 +54,8 @@ class ProxyHost:
 
         # 计划任务
         if generate:
-            self.__run_func_list()
-            self.update()
+            self.run_func_list()
+            self.update("http://example.com")
 
     def db_select_where(self, where_str):
         # db_select("anony = 'DP'")
@@ -106,7 +106,7 @@ class ProxyHost:
                                                           speed int)")
         self.conn.commit()
 
-    def update(self):
+    def update(self, url):
         # 通过访问 http://www.example.com/ 确定是否正确工作
         inc_lock = threading.Lock()  # 数据递增用锁
         proxy_list = self.get_all()
@@ -136,7 +136,7 @@ class ProxyHost:
                     print "updated ", cur_num
                 cur_proxy = proxy_list[cur_num]
                 wait_time[cur_num], status_code, body = curl_get(
-                    "http://example.com", proxy=cur_proxy)
+                    url, proxy=cur_proxy)
                 anony_type[cur_num] = check_anony(cur_proxy)
                 if status_code != 200:
                     wait_time[cur_num] = 1002
@@ -222,7 +222,7 @@ class ProxyHost:
         except:
             print "result from %s error" % func.__name__
 
-    def __run_func_list(self):
+    def run_func_list(self):
         # 计划任务，间歇性执行
         for func in self.func_list:
             fetch_func = getattr(fetch, func, None)
