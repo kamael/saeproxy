@@ -176,6 +176,7 @@ def ips():
 
 #查找代理服务器类型，socks4, socks5, http, https
 def find_ptotocol(host, port):
+    return "http"
     l = len(protocols)
     returns = [False] * l
     threads = [None] * l
