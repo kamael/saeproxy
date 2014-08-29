@@ -234,8 +234,6 @@ class ProxyHost:
 
 def check_anony(proxy):
     _, x, body = curl_get("http://haha.pythonanywhere.com/realip", proxy)
-    with open("body.txt", "a+") as f:
-        f.write(body + "\n")
     ips = re.findall(r"(?:\d+\.){3}\d+", body)
 
     if ips and ips[-1] == proxy["host"]:
