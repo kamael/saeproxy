@@ -9,7 +9,6 @@ import time
 import re
 import threading
 
-__all__ = ["filter_fetch", "test_func_return"]
 
 protocols = ["socks4", "socks5", "http", "https"]
 anony = ["DP", "AP", "TP", "HAP", "UN"]
@@ -72,14 +71,11 @@ def filter_fetch(proxy_list):
             proxy[4] = "1001"
 
         try:
-            proxy[4] = str(proxy[4])
+            proxy[4] = str(int(proxy[4]))
         except:
             proxy[4] = "1001"
 
-        #if proxy[4] != "1001":
-        #    print "kkk", proxy[4], type(proxy[4])
-
-        proxy_list[i] = tuple(proxy_list[i])
+        proxy_list[i] = tuple(proxy)
 
     result_list = []
     for i in xrange(proxy_len):
@@ -154,7 +150,7 @@ def curl_get(url, proxy=None, timeout=5):
             curl.setopt(pycurl.PROXYTYPE, pycurl.PROXYTYPE_SOCKS4)
         elif proxy["protocol"] == "socks5":
             curl.setopt(pycurl.PROXYTYPE, pycurl.PROXYTYPE_SOCKS5)
-        print proxy_url
+        #print proxy_url
         curl.setopt(pycurl.PROXY, proxy_url)
     t = time.time()
     try:
@@ -186,7 +182,6 @@ def ips():
 
 #查找代理服务器类型，socks4, socks5, http, https
 def find_ptotocol(host, port):
-    return "http"
     l = len(protocols)
     returns = [False] * l
     threads = [None] * l
