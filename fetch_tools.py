@@ -80,7 +80,7 @@ def filter_fetch(proxy_list):
     result_list = []
     for i in xrange(proxy_len):
         if del_items[i] == False:
-            result_list.append(proxy)
+            result_list.append(proxy_list[i])
     return result_list
 
 
